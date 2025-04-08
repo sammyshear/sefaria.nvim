@@ -1,5 +1,5 @@
-YourPluginName.disable()	neovim-plugin-boilerplate.txt	/*YourPluginName.disable()*
-YourPluginName.enable()	neovim-plugin-boilerplate.txt	/*YourPluginName.enable()*
-YourPluginName.options	neovim-plugin-boilerplate.txt	/*YourPluginName.options*
-YourPluginName.setup()	neovim-plugin-boilerplate.txt	/*YourPluginName.setup()*
-YourPluginName.toggle()	neovim-plugin-boilerplate.txt	/*YourPluginName.toggle()*
+Sefaria.disable()	sefaria.txt	/*Sefaria.disable()*
+Sefaria.enable()	sefaria.txt	/*Sefaria.enable()*
+Sefaria.options	sefaria.txt	/*Sefaria.options*
+Sefaria.setup()	sefaria.txt	/*Sefaria.setup()*
+Sefaria.toggle()	sefaria.txt	/*Sefaria.toggle()*

@@ -1,46 +1,46 @@
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                       *YourPluginName.toggle()*
-                           `YourPluginName.toggle`()
+                                                              *Sefaria.toggle()*
+                               `Sefaria.toggle`()
 Toggle the plugin by calling the `enable`/`disable` methods respectively.
 
 ------------------------------------------------------------------------------
-                                                       *YourPluginName.enable()*
-                        `YourPluginName.enable`({scope})
+                                                              *Sefaria.enable()*
+                           `Sefaria.enable`({scope})
 Initializes the plugin, sets event listeners and internal state.
 
 ------------------------------------------------------------------------------
-                                                      *YourPluginName.disable()*
-                           `YourPluginName.disable`()
+                                                             *Sefaria.disable()*
+                              `Sefaria.disable`()
 Disables the plugin, clear highlight groups and autocmds, closes side buffers and resets the internal state.
 
 
 ==============================================================================
 ------------------------------------------------------------------------------
-                                                        *YourPluginName.options*
-                            `YourPluginName.options`
-YourPluginName configuration with its default values.
+                                                               *Sefaria.options*
+                               `Sefaria.options`
+Sefaria configuration with its default values.
 
 Type ~
 `(table)`
 Default values:
 >lua
-  YourPluginName.options = {
+  Sefaria.options = {
       -- Prints useful logs about what event are triggered, and reasons actions are executed.
       debug = false,
   }
 
 <
 ------------------------------------------------------------------------------
-                                                        *YourPluginName.setup()*
-                       `YourPluginName.setup`({options})
-Define your your-plugin-name setup.
+                                                               *Sefaria.setup()*
+                           `Sefaria.setup`({options})
+Define your sefaria setup.
 
 Parameters ~
-{options} `(table)` Module config table. See |YourPluginName.options|.
+{options} `(table)` Module config table. See |Sefaria.options|.
 
 Usage ~
-`require("your-plugin-name").setup()` (add `{}` with your |YourPluginName.options| table)
+`require("sefaria").setup()` (add `{}` with your |Sefaria.options| table)
 
 
  vim:tw=78:ts=8:noet:ft=help:norl:
