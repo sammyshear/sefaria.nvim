@@ -5,6 +5,7 @@
 <p align="center">
     > An updated version of <a href="https://github.com/sammyshear/drash.nvim">drash.nvim</a> that works.
 </p>
+
 ## 📋 Installation
 
 <div align="center">
