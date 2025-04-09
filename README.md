@@ -3,71 +3,25 @@
 </p>
 
 <p align="center">
-    > An updated version of <a href="https://github.com/sammyshear/drash.nvim">drash.nvim</a> that works.
+    > An updated version of <a href="https://github.com/sammyshear/drash.nvim">drash.nvim</a> that works better, using better practices, and uses snacks.nvim in place of telescope.
 </p>
 
-## 📋 Installation
+## Features
 
-<div align="center">
-<table>
-<thead>
-<tr>
-<th>Package manager</th>
-<th>Snippet</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
+The plugin provides a command `Parsha` which will open the Parsha for the week.
 
-[wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)
+The plugin also provides the `SearchSefaria` command which allows you to make use of the Sefaria ElasticSearch API to search any texts on the website for arbitrary queries. The command takes an argument that is your search query and opens a snacks.nvim picker to allow you to select the text you want to see.
 
-</td>
-<td>
-
-```lua
--- stable version
-use {"sammyshear/sefaria.nvim", tag = "*" }
--- dev version
-use {"sammyshear/sefaria.nvim"}
-```
-
-</td>
-</tr>
-<tr>
-<td>
-
-[junegunn/vim-plug](https://github.com/junegunn/vim-plug)
-
-</td>
-<td>
-
-```lua
--- stable version
-Plug "sammyshear/sefaria.nvim", { "tag": "*" }
--- dev version
-Plug "sammyshear/sefaria.nvim"
-```
-
-</td>
-</tr>
-<tr>
-<td>
+## Installation
 
 [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
 
-</td>
-<td>
-
 ```lua
--- stable version
-require("lazy").setup({{"sammyshear/sefaria.nvim", version = "*"}})
--- dev version
-require("lazy").setup({"sammyshear/sefaria.nvim"})
+  {
+    "sammyshear/sefaria.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/snacks.nvim",
+    },
+  },
 ```
-
-</td>
-</tr>
-</tbody>
-</table>
-</div>

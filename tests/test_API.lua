@@ -25,11 +25,6 @@ T["setup()"]["sets exposed methods and default options value"] = function()
     -- global object that holds your plugin information
     Helpers.expect.global_type(child, "_G.Sefaria", "table")
 
-    -- public methods
-    Helpers.expect.global_type(child, "_G.Sefaria.toggle", "function")
-    Helpers.expect.global_type(child, "_G.Sefaria.disable", "function")
-    Helpers.expect.global_type(child, "_G.Sefaria.enable", "function")
-
     -- config
     Helpers.expect.global_type(child, "_G.Sefaria.config", "table")
 

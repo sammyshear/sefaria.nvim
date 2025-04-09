@@ -3,27 +3,21 @@ local config = require("sefaria.config")
 
 local Sefaria = {}
 
---- Toggle the plugin by calling the `enable`/`disable` methods respectively.
-function Sefaria.toggle()
-    if _G.Sefaria.config == nil then
-        _G.Sefaria.config = config.options
+function Sefaria.parsha()
+    local parsha_info = main.parsha()
+    if parsha_info == nil then
+        return nil
     end
 
-    main.toggle("public_api_toggle")
+    local bufnr = vim.api.nvim_create_buf(true, true)
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, parsha_info.text[1])
+    vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
+    vim.wo.wrap = true
+    vim.api.nvim_win_set_buf(0, bufnr)
 end
 
---- Initializes the plugin, sets event listeners and internal state.
-function Sefaria.enable(scope)
-    if _G.Sefaria.config == nil then
-        _G.Sefaria.config = config.options
-    end
-
-    main.toggle(scope or "public_api_enable")
-end
-
---- Disables the plugin, clear highlight groups and autocmds, closes side buffers and resets the internal state.
-function Sefaria.disable()
-    main.toggle("public_api_disable")
+function Sefaria.search(query)
+    main.search(query)
 end
 
 -- setup Sefaria options and merge them with user provided ones.

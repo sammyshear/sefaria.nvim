@@ -6,10 +6,18 @@ if #vim.api.nvim_list_uis() == 0 then
     -- Add 'mini.nvim' to 'runtimepath' to be able to use 'mini.test'
     -- Assumed that 'mini.nvim' is stored in 'deps/mini.nvim'
     vim.cmd("set rtp+=deps/mini.nvim")
+    vim.cmd("set rtp+=deps/plenary.nvim")
+    vim.cmd("set rtp+=deps/snacks.nvim")
 
     -- Set up 'mini.test'
     require("mini.test").setup()
 
     -- Set up 'mini.doc'
     require("mini.doc").setup()
+
+    -- Set up Plenary
+    require("plenary").setup()
+
+    -- Set up snacks.nvim
+    require("snacks").setup()
 end

@@ -1,57 +1,84 @@
-local log = require("sefaria.util.log")
-local state = require("sefaria.state")
+local api = require("sefaria.util.api")
+local Snacks = require("snacks")
 
 -- internal methods
 local main = {}
 
--- Toggle the plugin by calling the `enable`/`disable` methods respectively.
---
----@param scope string: internal identifier for logging purposes.
----@private
-function main.toggle(scope)
-    if state.get_enabled(state) then
-        log.debug(scope, "sefaria is now disabled!")
-
-        return main.disable(scope)
+--- Get Parsha and Related Texts
+---
+function main.parsha()
+    local calendar = api.get_calendar()
+    if calendar == nil then
+        return nil
     end
 
-    log.debug(scope, "sefaria is now enabled!")
+    local parsha_ref = ""
+    local parsha_title = ""
+    for _, item in ipairs(calendar.calendar_items) do
+        if item.title.en == "Parashat Hashavua" then
+            parsha_ref = item.ref
+            parsha_title = item.displayValue.en
+        end
+    end
 
-    main.enable(scope)
+    local parsha = api.get_text(parsha_ref)
+    if parsha == nil then
+        return nil
+    end
+
+    local text = parsha.versions[1].text
+
+    local related = api.get_related(parsha_ref)
+    if related == nil then
+        return nil
+    end
+
+    local commentaries = {}
+    for _, item in ipairs(related.links) do
+        if item.type == "commentary" then
+            commentaries[#commentaries + 1] = item.ref
+        end
+    end
+
+    return {
+        parsha_ref = parsha_ref,
+        parsha_title = parsha_title,
+        text = text,
+        commentaries = commentaries,
+    }
 end
 
---- Initializes the plugin, sets event listeners and internal state.
+--- Snacks Picker for Searching Sefaria
 ---
---- @param scope string: internal identifier for logging purposes.
----@private
-function main.enable(scope)
-    if state.get_enabled(state) then
-        log.debug(scope, "sefaria is already enabled")
+--- @param query string
+function main.search(query)
+    local data = api.post_search(query)
 
-        return
+    local gen_items = function(tbl)
+        local items = {}
+        for i = 1, #tbl do
+            table.insert(
+                items,
+                { text = tbl[i]._id, preview = { text = tbl[i].highlight.exact[1] } }
+            )
+        end
+        return items
     end
 
-    state.set_enabled(state)
+    Snacks.picker.pick({
+        items = gen_items(data.hits.hits),
+        preview = "preview",
+        format = "text",
+        confirm = function(picker, item)
+            picker:close()
 
-    -- saves the state globally to `_G.Sefaria.state`
-    state.save(state)
-end
-
---- Disables the plugin for the given tab, clear highlight groups and autocmds, closes side buffers and resets the internal state.
----
---- @param scope string: internal identifier for logging purposes.
----@private
-function main.disable(scope)
-    if not state.get_enabled(state) then
-        log.debug(scope, "sefaria is already disabled")
-
-        return
-    end
-
-    state.set_disabled(state)
-
-    -- saves the state globally to `_G.Sefaria.state`
-    state.save(state)
+            local bufnr = vim.api.nvim_create_buf(true, true)
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { item.preview.text })
+            vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
+            vim.wo.wrap = true
+            vim.api.nvim_win_set_buf(0, bufnr)
+        end,
+    })
 end
 
 return main

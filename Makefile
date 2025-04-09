@@ -20,10 +20,12 @@ test-0.8.3:
 	bob use 0.8.3
 	make test
 
-# installs `mini.nvim`, used for both the tests and documentation.
+# installs dependecies
 deps:
 	@mkdir -p deps
 	git clone --depth 1 https://github.com/echasnovski/mini.nvim deps/mini.nvim
+	git clone --depth 1 https://github.com/nvim-lua/plenary.nvim deps/plenary.nvim	
+	git clone --depth 1 https://github.com/folke/snacks.nvim deps/snacks.nvim
 
 # installs deps before running tests, useful for the CI.
 test-ci: deps test
