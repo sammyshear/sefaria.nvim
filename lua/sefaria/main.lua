@@ -54,6 +54,10 @@ end
 function main.search(query)
     local data = api.post_search(query)
 
+    if data == nil then
+        return nil
+    end
+
     local gen_items = function(tbl)
         local items = {}
         for i = 1, #tbl do
