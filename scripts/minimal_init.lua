@@ -15,9 +15,6 @@ if #vim.api.nvim_list_uis() == 0 then
     -- Set up 'mini.doc'
     require("mini.doc").setup()
 
-    -- Set up Plenary
-    require("plenary").setup()
-
     -- Set up snacks.nvim
     require("snacks").setup()
 end
