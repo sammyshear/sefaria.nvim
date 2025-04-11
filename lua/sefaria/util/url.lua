@@ -1,5 +1,8 @@
 local url = {}
 
+---@param str string
+---@return string
+---@private
 url.encode = function(str)
     str = string.gsub(str, "([^%w%.%- ])", function(c)
         return string.format("%%%02X", string.byte(c))

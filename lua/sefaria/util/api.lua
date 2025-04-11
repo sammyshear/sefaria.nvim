@@ -21,6 +21,7 @@ end
 --- Sefaria POST Search
 ---
 --- @param query string
+---@private
 function api.post_search(query)
     if query == nil then
         return nil
@@ -42,6 +43,7 @@ end
 --- Sefaria GET Text
 ---
 --- @param text string
+---@private
 function api.get_text(text)
     if text == nil then
         return nil
@@ -63,6 +65,7 @@ end
 --- Sefaria GET Related
 ---
 --- @param text string
+---@private
 function api.get_related(text)
     if text == nil then
         return nil

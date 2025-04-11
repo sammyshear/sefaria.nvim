@@ -44,4 +44,15 @@ T["setup()"]["overrides default values"] = function()
     Helpers.expect.config_type(child, "debug", "boolean")
 end
 
+-- Tests relating to the parsha command
+T["parsha()"] = MiniTest.new_set()
+
+T["parsha()"]["checks to see if the parsha text is successfully fetched"] = function()
+    child.lua([[require('sefaria').parsha()]])
+
+    Helpers.expect.global_type(child, "_G.Sefaria", "table")
+
+    Helpers.expect.state_type(child, "parsha_text", "table")
+end
+
 return T

@@ -1,4 +1,5 @@
 local api = require("sefaria.util.api")
+local state = require("sefaria.state")
 local Snacks = require("snacks")
 
 -- internal methods
@@ -6,6 +7,7 @@ local main = {}
 
 --- Get Parsha and Related Texts
 ---
+---@private
 function main.parsha()
     local calendar = api.get_calendar()
     if calendar == nil then
@@ -40,6 +42,9 @@ function main.parsha()
         end
     end
 
+    state:set_parsha_text(text[1])
+    state:save()
+
     return {
         parsha_ref = parsha_ref,
         parsha_title = parsha_title,
@@ -51,6 +56,7 @@ end
 --- Snacks Picker for Searching Sefaria
 ---
 --- @param query string
+---@private
 function main.search(query)
     local data = api.post_search(query)
 
