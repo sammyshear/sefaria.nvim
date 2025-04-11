@@ -1,7 +1,2 @@
 Sefaria.options	sefaria.txt	/*Sefaria.options*
 Sefaria.setup()	sefaria.txt	/*Sefaria.setup()*
-api.get_related()	sefaria.txt	/*api.get_related()*
-api.get_text()	sefaria.txt	/*api.get_text()*
-api.post_search()	sefaria.txt	/*api.post_search()*
-main.parsha()	sefaria.txt	/*main.parsha()*
-main.search()	sefaria.txt	/*main.search()*
