@@ -14,6 +14,9 @@ function Sefaria.parsha()
     vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
     vim.wo.wrap = true
     vim.api.nvim_win_set_buf(0, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, "Commentaries", function()
+        main.commentaries(parsha_info)
+    end, {})
 end
 
 function Sefaria.search(query)

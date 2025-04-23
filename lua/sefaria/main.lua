@@ -53,7 +53,52 @@ function main.parsha()
     }
 end
 
---- Snacks Picker for Searching Sefaria
+--- Snacks Picker for Commentaries on Parsha
+---
+--- @param parsha table
+---@private
+function main.commentaries(parsha)
+    local items = {}
+    for i = 1, #parsha.commentaries do
+        table.insert(items, { text = parsha.commentaries[i] })
+    end
+
+    Snacks.picker.pick({
+        items = items,
+        preview = "none",
+        format = "text",
+        confirm = function(picker, item)
+            picker:close()
+
+            local data = api.get_text(item.text)
+
+            if data == nil then
+                return
+            end
+
+            local text = {}
+
+            if data.versions[1] == nil then
+                vim.print("No versions found")
+                return
+            end
+
+            if type(data.versions[1].text) == "string" then
+                text[1] = data.versions[1].text
+            elseif type(data.versions[1].text) == "table" then
+                text = data.versions[1].text
+            end
+
+            local bufnr = vim.api.nvim_create_buf(true, true)
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { text[1] })
+            vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
+            vim.wo.wrap = true
+            vim.api.nvim_win_set_buf(0, bufnr)
+        end,
+    })
+end
+
+--- Snacks picker for Searching Sefaria
 ---
 --- @param query string
 ---@private
