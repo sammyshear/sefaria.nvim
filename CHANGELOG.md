@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/sammyshear/sefaria.nvim/compare/v1.1.0...v1.2.0) (2025-04-23)
+
+
+### Features
+
+* add commentaries command ([c5c592b](https://github.com/sammyshear/sefaria.nvim/commit/c5c592b96a0fb352665cd58483124b7aeb26e808))
+
 ## [1.1.0](https://github.com/sammyshear/sefaria.nvim/compare/v1.0.0...v1.1.0) (2025-04-11)
 
 
